@@ -1,16 +1,15 @@
-//var express  = require('express');
-//var app = express();
+var express  = require('express');
+var app = express();
 
-
-const http = require('http');
-
-var conec = function (req, res){
-    res.end('Hello World!');
+var conect = function (req, res){
+    res.send('Hello World!');
 }
 
-http.createServer(conec);
+app.get('/', conect);
 
-http.listen(3000);
+app.listen(3000, function(){
+    console.log('Hello World!');
+});
 
 
 
