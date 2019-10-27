@@ -1,29 +1,15 @@
 var express  = require('express');
 var app = express();
 
-var conect = function (req, res){
-    res.send('Hello World!');
-}
+var hostname = "127.0.0.1";
+var port = 3000;
+var link = `http://${hostname}:${port}/`;
 
-app.get('/', conect);
-
-app.listen(3000, function(){
-    console.log('Hello World!');
+app.get('/',function (req, res){
+    res.sendFile(__dirname + "/src/login.html");
 });
 
 
-
-
-
-/*
-var hostname = 'localhost';
-var port = 8080;
-
-http.createServer(function(req, res){
-    res.end("<h1>Hello World</h1>   ");
-}).listen(port);
-
-link = `http://${hostname}:${port}/`;
-
-console.log(`Server running at `+ link);
-*/
+app.listen(port, function(){
+    console.log(`Server running at `+ link);
+});
