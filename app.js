@@ -14,15 +14,33 @@ const sequelize = new Sequelize('nodeTest', 'root', 'Jac@1234566', {
   dialect:'mysql'
 });
    
-sequelize
-  .authenticate()
-  .then(() => {
+sequelize.authenticate().then(() => {
     console.log('Connection has been established successfully.');
   })
   .catch(err => {
     console.error('Unable to connect to the database:', err);
   });
 
+const User = sequelize.define('user', {
+  // attributes
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  lastName: {
+    type: Sequelize.STRING
+    // allowNull defaults to true
+  }
+});
+
+// Note: using `force: true` will drop the table if it already exists
+User.sync({ force: true }).then(() => {
+  // Now the `users` table in the database corresponds to the model definition
+  return User.create({
+    firstName: 'John',
+    lastName: 'Hancock'
+  });
+});
 
 app.get('/',function (req, res){
     res.sendFile(__dirname + "/src/login.html");
@@ -32,4 +50,5 @@ app.get('/',function (req, res){
 app.listen(port, function(){
     console.log(`Server running at `+ link);
 });
+
 
