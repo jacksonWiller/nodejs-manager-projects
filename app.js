@@ -1,9 +1,26 @@
 var express  = require('express');
+var handlebars = require('express-handlebars');
 var app = express();
+
+app.engine('handlebars', handlebars({defaultLayout:'main'}));
+app.set('view engine', 'handlebars');
+
+//Rotas
+//app.get('/',function (req, res){
+//  res.sendFile(__dirname + "/src/login.html");
+//});
+
+app.get('/', function (req, res) {
+  res.render('home');
+});
 
 var hostname = "127.0.0.1";
 var port = 3000;
 var link = `http://${hostname}:${port}/`;
+
+app.listen(port, function(){
+  console.log(`Server running at `+ link);
+});
 
 
 const Sequelize = require('sequelize');
@@ -34,21 +51,13 @@ const User = sequelize.define('user', {
 });
 
 // Note: using `force: true` will drop the table if it already exists
-User.sync({ force: true }).then(() => {
-  // Now the `users` table in the database corresponds to the model definition
-  return User.create({
-    firstName: 'John',
-    lastName: 'Hancock'
-  });
-});
+//User.sync({ force: true });
 
-app.get('/',function (req, res){
-    res.sendFile(__dirname + "/src/login.html");
-});
-
-
-app.listen(port, function(){
-    console.log(`Server running at `+ link);
+User.create({ 
+  firstName: "Jane", 
+  lastName: "Doe" })
+  .then(jane => {
+  console.log("Jane's auto-generated ID:", jane.id);
 });
 
 
