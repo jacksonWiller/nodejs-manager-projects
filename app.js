@@ -1,22 +1,36 @@
 const express  = require('express');
-const handlebars = require('express-handlebars');
 const app = express();
+const handlebars = require('express-handlebars');
+const bodyParser = require('body-parser');
+const Sequelize = require('sequelize');
 
-app.engine('handlebars', handlebars({defaultLayout:'main'}));
-app.set('view engine', 'handlebars');
+
+
+//Config
+  //Template Engine
+  app.engine('handlebars', handlebars({defaultLayout:'main'}));
+  app.set('view engine', 'handlebars');
+  //Body Parser
+   app.use(bodyParser.urlencoded({extended: false }))
+   app.use(bodyParser.json()); 
+  //conexão com o banco de dados MySql
+  const sequelize = new Sequelize('nodeTest', 'root', 'Jac@1234566', {
+    host: 'localhost',
+    dialect:'mysql'
+  });
+
 
 //Rotas
-//app.get('/',function (req, res){
-//  res.sendFile(__dirname + "/src/login.html");
-//});
+  app.get('/cad', function (req, res) {
+    res.render('formpostagem');
+  });
 
-app.get('/', function (req, res) {
-  res.render('home');
-});
+  app.post('/add', function (req, res) {
+    //res.render('formpostagem');
+    res.send("Texto: "+req.body.titulo+" Conteudo: "+req.body.conteudo);
+  });
 
-app.get('/addpessoa', function (req, res) {
-  res.render('add-pessoa');
-});
+
 
 const hostname = "127.0.0.1";
 const port = 3000;
@@ -29,12 +43,9 @@ app.listen(port, function(){
 
 
 // models
-const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('nodeTest', 'root', 'Jac@1234566', {
-  host: 'localhost',
-  dialect:'mysql'
-});
+
+
  
 // testar conexão
 sequelize.authenticate().then(() => {
@@ -59,7 +70,7 @@ const Usuario = sequelize.define('usuario', {
   // attributes
   nome: {
     type: Sequelize.STRING,
-    allowNull: false
+    //llowNull: false
   },
   sobreNome: {
     type: Sequelize.STRING
@@ -75,17 +86,31 @@ const Usuario = sequelize.define('usuario', {
 //Usuario.sync({ force: true });
 
 Usuario.create({ 
-  titulo: "tcc-gen", 
-  conteudo: "tcc-gen é um gerenciador de tcc" })
-  .then(jackson => {
-  console.log(nome+"'s auto-generated ID:", jackson.id);
-});
-
-Usuario.create({ 
   nome: "Jackson", 
-  sobreNome: "Duarte" })
+  sobreNome: "Duarte",
+  idade: 20,
+  email: "jacksonwillerduarte@gmail.com"
+});
+  
+
+/*
+.then(jackson => {
+  console.log(nome+"'s auto-generated ID:", jackson.id);
+});
+
+
+
+/*
+Usuario.create({ 
+  titulo: "tcc-gen", 
+  conteudo: "tcc-gen é um gerenciador de tcc",
+  idade: 20,
+  email: "jacksonwillerduarte@gmail.com"  
+})
   .then(jackson => {
   console.log(nome+"'s auto-generated ID:", jackson.id);
 });
 
+
+*/
 

@@ -11,3 +11,7 @@ http.createServer(function(req, res){
 link = `http://${hostname}:${port}/`;
 
 console.log(`Server running at `+ link);
+
+//app.get('/',function (req, res){
+//  res.sendFile(__dirname + "/src/login.html");
+//});
