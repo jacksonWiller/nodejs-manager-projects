@@ -36,7 +36,7 @@ router.get('/post', (req, res) => {
    if(req.body.nome.length < 2){
       erros.push({texto: "Nome da categoria ´e muito pequeno"})
    }
-
+/////////////////////////////
    if(erros.length > 0){
       res.render("admin/addCategorias", {erros: erros})
    }else{
@@ -46,16 +46,15 @@ router.get('/post', (req, res) => {
       }
    
       new Categoria(novaCategoria).save().then(() => {
-         console.log("Categiria salva com sucesso!");
-         res.redirect("/admin/categorias")
+         req.flash("success_msg", "Categoria criada com sucesso")
+         res.redirect("/admin/categoria/")
+         console.log("Categoria salva com sucesso")
       }).catch((err) => {
-         req.flash("error_msg", "Houve um erro ao salvar a categoria, tente novamentr ")
-         console.log("Erro ao salvar categoria!"+err);
+         req.flash("error_msg", "Houve um erro ao salvar a categoria, tente novamente")
+         res.redirect("/admin")
       })
    }
 })
-
-
 
 
 
