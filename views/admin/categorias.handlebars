@@ -1,6 +1,15 @@
 <h2>Lista de Categoria:</h2>
 <hr>
 
-<form method="get" action="/admin/categoria/add">
-    <button class="btn btn-success">Nova categoria</button>
-</form>
+<a href="/admin/categoria/add"> <button class="btn btn-success">Nova categoria</button> </a>
+
+{{#each categoria}}
+    <div class="card">
+        <div class="card-body">
+            <h4>{{nome}}</h4>
+            <small>{{slug}}</small>
+        </div>
+    </div>
+{{/else}}
+
+{{/each}}

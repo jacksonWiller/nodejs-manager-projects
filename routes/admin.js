@@ -9,12 +9,18 @@ router.get('/', (req, res) => {
    res.render("admin/index"); 
 })
 
-router.get('/post', (req, res) => {
-    res.send("Página de post"); 
+router.get('/post', (req, res) => { 
+   res.send("Página de post"); 
  })
 
  router.get('/categoria', (req, res) => {
-    res.render("admin/categorias"); 
+   Categoria.find().then((categoria) => {
+      res.render("admin/categorias", {cotegorias: cotegorias})
+   }).catch((err) => {
+      req.flash("error-msg","Houve erro ao listar as categorias" +err)
+      console.log(err);
+      //res.redirect("/admin")
+   })
  })
 
  router.get('/categoria/add', (req, res) => {
@@ -36,7 +42,7 @@ router.get('/post', (req, res) => {
    if(req.body.nome.length < 2){
       erros.push({texto: "Nome da categoria ´e muito pequeno"})
    }
-/////////////////////////////
+
    if(erros.length > 0){
       res.render("admin/addCategorias", {erros: erros})
    }else{
