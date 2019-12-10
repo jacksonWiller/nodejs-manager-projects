@@ -1,14 +1,15 @@
 <h2>Lista de Trabalhos:</h2>
 <hr>
-<a href="/admin/postagens/add"><button type="button" class="btn btn-success">Novos Trabalhos</button></a>
+<a href="/admin/postagens/add"><button type="button" class="btn btn-success btn-lg">Criar um novo trabalho</button></a>
 
 {{#each postagens}}
   <div class="card mt-3">
     <div class="card-body">
       <h4>{{titulo}}</h4>
-      <p>Descrição: {{descricao}}</p>
+      <h4>{{slug}}</h4>
+      <p>Resumo: {{descricao}}</p>
       <small>Data: {{data}}</small><br>
-      <small>categoria: {{categoria.nome}}</small><br>
+      <small>Área de Pesquisa: {{categoria.nome}}</small><br>
       <a href="/admin/postagens/edit/{{_id}}"><button type="button" class="btn btn-warning mt-2">Editar Trbalho</button></a>
       <a href="/admin/postagens/deletar/{{_id}}"><button type="button" class="btn btn-danger mt-2">Remover Trabalho</button></a>
     </div>
