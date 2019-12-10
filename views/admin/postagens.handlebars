@@ -1,6 +1,6 @@
-<h2>Lista de postagens:</h2>
+<h2>Lista de Trabalhos:</h2>
 <hr>
-<a href="/admin/postagens/add"><button type="button" class="btn btn-success">Nova postagem</button></a>
+<a href="/admin/postagens/add"><button type="button" class="btn btn-success">Novos Trabalhos</button></a>
 
 {{#each postagens}}
   <div class="card mt-3">
@@ -9,10 +9,10 @@
       <p>Descrição: {{descricao}}</p>
       <small>Data: {{data}}</small><br>
       <small>categoria: {{categoria.nome}}</small><br>
-      <a href="/admin/postagens/edit/{{_id}}"><button type="button" class="btn btn-warning mt-2">Editar postagem</button></a>
-      <a href="/admin/postagens/deletar/{{_id}}"><button type="button" class="btn btn-danger mt-2">Remover postagem</button></a>
+      <a href="/admin/postagens/edit/{{_id}}"><button type="button" class="btn btn-warning mt-2">Editar Trbalho</button></a>
+      <a href="/admin/postagens/deletar/{{_id}}"><button type="button" class="btn btn-danger mt-2">Remover Trabalho</button></a>
     </div>
   </div>
 {{else}}
-  <p>Nenhuma postagem registrada.</p>
+  <p>Nenhum Trabalho registrado.</p>
 {{/each}}

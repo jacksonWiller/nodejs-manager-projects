@@ -3,7 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 require('../models/Usuario')
 const Usuario = mongoose.model('usuarios')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const passport = require('passport')
 
 router.get('/registro',(req,res)=>{
