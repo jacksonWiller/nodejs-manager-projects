@@ -1,5 +1,5 @@
 if(process.env.Node_ENV=='production'){
-  module.exports = {mongoURI:"mongodb+srv://DevSoaresMadmin:<password>@cluster0-gcyl0.azure.mongodb.net/test?retryWrites=true"}
+  module.exports = {mongoURI:"mongodb+srv://<admin>:<admin>@cluster0-9a0eq.gcp.mongodb.net/test?retryWrites=true&w=majority"}
 }else{
   module.exports = {mongoURI:'mongodb://localhost/blogapp'}
 }
