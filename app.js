@@ -4,7 +4,7 @@
   const bodyParser = require('body-parser')
   const mongoose = require('mongoose')
   const app = express()
-  const admin = require('./routes/admin')
+  const admin = require('./controller/admin')
   const path = require('path')
   const session = require('express-session')
   const flash = require('connect-flash')
@@ -12,10 +12,12 @@
   const Postagem = mongoose.model('postagens')
   require('./models/AreaConhecimento')
   const Categoria = mongoose.model('categorias')
-  const usuarios = require('./routes/usuario')
+  const usuarios = require('./controller/usuario')
   const passport = require('passport')
   require('./config/auth')(passport)
   const db = require('./config/db')
+  require('./models/AreaConhecimento')
+  const Categoria = mongoose.model('categorias')
 
 //CONFIGURACOES
   // Sessão
