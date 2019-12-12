@@ -21,12 +21,17 @@
   <div class="card-body">
     <h3>{{titulo}}</h3>
     <p>{{descricao}}</p>
-    <a href="/postagem/{{slug}}"><button type="button" class="btn btn-info">Leia mais...</button></a>
+    <a href="/postagem/{{slug}}"><button type="button" class="btn btn-info">Ver projeto</button></a>
     <hr>
     <small>Categoria: {{categoria.nome}}</small>
     <small>Data de publicação: {{data}}</small>
   </div>
 </div>
 {{else}}
-  <h4>Nenhuma postagem</h4>
+  <h4>Nenhum projeto</h4>
 {{/each}}
+
+<footer>
+  <img src="http://bit.ly/2PeYMBG" alt="Italian Trulli">
+
+</footer>
