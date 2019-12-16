@@ -12,7 +12,9 @@
     e professores para que a fase de escolha de temas e desenvolvimento dos 
     trabalhos gere menos frustrações para os discentes e conflitos de informações. 
   </p>
-  <a class="btn btn-primary btn-lg" href="/usuarios/registro" role="button"> Catastrar </a>
+  <a class="btn btn-primary btn-lg" href="/usuarios/registro" role="button"> Cadastrar </a>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Saiba mais</button>
+
 </div>
 <h2>Trabalhos recentes</h2>
 
@@ -21,12 +23,41 @@
   <div class="card-body">
     <h3>{{titulo}}</h3>
     <p>{{descricao}}</p>
-    <a href="/postagem/{{slug}}"><button type="button" class="btn btn-info">Leia mais...</button></a>
+    <a href="/postagem/{{slug}}"><button type="button" class="btn btn-info">Ver projeto</button></a>
     <hr>
     <small>Categoria: {{categoria.nome}}</small>
     <small>Data de publicação: {{data}}</small>
   </div>
 </div>
 {{else}}
-  <h4>Nenhuma postagem</h4>
+  <h4>Nenhum projeto</h4>
 {{/each}}
+
+<footer>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Sobre o TCC-GEN</h4>
+      </div>
+      <div class="modal-body">
+            <img lass="modal-body" id ="img" src="http://bit.ly/2PeYMBG" alt="Italian Trulli">
+
+        <p>O TCC Manager é um sistema WEB destinado ao gerenciamento de Trabalhos de Conclusão de Curso, para a instituições de cursos superiores que têm como requisito para obtenção do diploma o desenvolvimento de um trabalho de conclusão de curso (TCC). 
+Entretanto, uma dificuldade encontrada por grande parte dos alunos na fase de conclusão do curso é encontrar um tema adequado e, juntamente, um orientador para o desenvolvimento do TCC. O desenvolvimento do sistema aqui descrito visa a melhora da comunicação entre alunos e professores para que a fase de escolha de temas e desenvolvimento dos trabalhos gere menos frustrações para os discentes e conflitos de informações. 
+Seguindo as normas para o trabalho de conclusão de curso do TADS, os seguintes atores terão acesso ao sistema: Coordenador: O coordenador é o professor da que ministra a disciplina de TCC. Esse coordenador pode acessar o sistema tanto como professor como coordenador, tendo controle sobre todo o sistema; Professor: O professor é o responsável pela orientação dos alunos matriculados em TCC, possuindo acesso suficiente para cadastramento de seus trabalhos e controle dos trabalhos já cadastrados; Aluno: O aluno é aquele que se matriculou na disciplina de TCC e tem permissões suficientes para observar os trabalhos atualmente cadastrados no sistema.
+</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">FECHAR</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+</footer>
