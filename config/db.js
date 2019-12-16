@@ -5,3 +5,5 @@
   //module.exports = {mongoURI:'mongodb://localhost/blogapp'}
 
 
+//}
+console.log(process.env.Node_ENV)

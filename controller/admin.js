@@ -11,11 +11,15 @@ router.get('/',eAdmin,(req, res)=>{
   res.render('admin/index')
 })
 
+
+
+
+///////////////////////////Área de Ensino////////////////////////////////
 router.get('/categorias', eAdmin, (req, res)=>{
   Categoria.find().then((categorias)=>{
     res.render('admin/categorias', {categorias: categorias})
   }).catch((err)=>{
-    req.flash('error_msg','Houve um erro ao listar as categorias!')
+    req.flash('error_msg','Houve um erro ao listar as Área de Pesquisa!')
     req.redirect('/admin')
   })
 
@@ -47,7 +51,7 @@ router.post('/categorias/nova',eAdmin, (req,res)=>{
     }
 
     new Categoria(novaCategoria).save().then(()=>{
-      req.flash('success_msg','Categoria cadastrada com sucesso')
+      req.flash('success_msg','Categoria cadastrada com Área de Pesquisa')
       res.redirect('/admin/categorias')
     }).catch((err)=>{
       req.flash('error_msg', 'Houve um problema ao cadastrar.')
@@ -60,7 +64,7 @@ router.get('/categorias/edit/:id', eAdmin,(req, res)=>{
       Categoria.findOne({_id:req.params.id}).then((categoria)=>{
         res.render('admin/editcategorias', {categoria:categoria})
       }).catch((err)=>{
-        req.flash('error_msg', 'Esta categoria não existe')
+        req.flash('error_msg', 'Esta Área de Pesquisa não existe')
         res.redirect('/admin/categorias')
       })
 })
@@ -84,10 +88,10 @@ router.post('/categorias/edit',eAdmin,(req,res)=>{
       categoria.nome = req.body.nome
       categoria.slug = req.body.slug
       categoria.save().then(()=>{
-        req.flash('success_msg', 'Categoria editada com sucesso!')
+        req.flash('success_msg', 'Área de Pesquisa editada com sucesso!')
         res.redirect('/admin/categorias')
       }).catch((err)=>{
-        req.flash('error_msg', 'Houve um erro ao salvar a categoria!')
+        req.flash('error_msg', 'Houve um erro ao salvar a Área de Pesquisa!')
         res.redirect('/admin/categorias')
       })
       }
@@ -106,6 +110,8 @@ router.post('/categorias/deletar', eAdmin,(req, res)=>{
     res.redirect('/admin/categorias')
   })
 })
+
+////////////////////////////////////////Trabalhos//////////////////////////////////////////
 
 router.get('/postagens',eAdmin, (req, res)=>{
   Postagem.find().populate('categoria').sort({data:'desc'}).then((postagens)=>{
@@ -231,5 +237,77 @@ router.get('/postagens/deletar/:id', eAdmin,(req,res)=>{
     res.redirect('/admin/postagens')
   })
 })
+///////////////////////////Universidade//////////////////////////////////////
+
+router.get('/universidades', eAdmin, (req, res)=>{
+  Categoria.find().then((universidades)=>{
+    res.render('admin/universidades', {universidades: universidades})
+  }).catch((err)=>{
+    req.flash('error_msg','Houve um erro ao listar as universidades!')
+    req.redirect('/admin')
+  })
+
+})
+
+router.get('/universidades/add',eAdmin,(req, res)=>{
+  res.render('admin/adduniversidades')
+})
+
+router.post('/universidades/nova',eAdmin, (req,res)=>{
+
+  
+    const novaUnivesidade = {
+      nome: req.body.nome,
+      slug: req.body.slug
+    }
+
+    new Categoria(novaUnivesidade).save().then(()=>{
+      req.flash('success_msg','Categoria cadastrada com sucesso')
+      res.redirect('/admin/universidades')
+    }).catch((err)=>{
+      req.flash('error_msg', 'Houve um problema ao cadastrar.')
+      res.redirect('/admin')
+    })
+})
+
+router.get('/uiniversidade/edit/:id', eAdmin,(req, res)=>{
+      Categoria.findOne({_id:req.params.id}).then((universidade)=>{
+        res.render('admin/edituniversidades', {universidade:universidade})
+      }).catch((err)=>{
+        req.flash('error_msg', 'Esta categoria não existe')
+        res.redirect('/admin/unversidades')
+      })
+})
+
+router.post('/universidade/edit',eAdmin,(req,res)=>{
+  Categoria.findOne({_id:req.body.id}).then((universidade)=>{
+    
+      categoria.nome = req.body.nome
+      categoria.slug = req.body.slug
+      categoria.save().then(()=>{
+        req.flash('success_msg', 'Categoria editada com sucesso!')
+        res.redirect('/admin/universidades')
+      }).catch((err)=>{
+        req.flash('error_msg', 'Houve um erro ao salvar a categoria!')
+        res.redirect('/admin/universidades')
+      })
+      
+  }).catch((err)=>{
+    req.flash('error_msg', 'Houve um erro ao editar a categoria!')
+    res.redirect('/admin/universidades')
+  })
+})
+
+router.post('/universidades/deletar', eAdmin,(req, res)=>{
+  Categoria.deleteOne({_id: req.body.id}).then(()=>{
+    req.flash('success_msg', 'Categoria removida com sucesso!')
+    res.redirect('/admin/universidades')
+  }).catch((err)=>{
+    req.flash('error_msg', 'Houve um erro ao remover a categoria!')
+    res.redirect('/admin/universidades')
+  })
+})
+
+
 
 module.exports = router

@@ -4,18 +4,18 @@
   </div>
 {{else}}
 {{/each}}
-<h3>Nova Área de Pesquisa</h3>
+<h3>Nova Universidade</h3>
 <div class="card">
   <div class="card-body">
-    <form action="/admin/categorias/nova" method="post">
+    <form action="/admin/universidades/nova" method="post">
       <label for="nome">Nome: </label>
-        <input type="text" id="nome" name="nome" placeholder="Nome da Área de Pesquisa" class="form-control">
+        <input type="text" id="nome" name="nome" placeholder="Nome da categoria" class="form-control">
         <br>
       <label for="slug">Descrição: </label>
         <textarea type="text" id="slug" name="slug" placeholder="Área de Pesquisa"  class="form-control" 
         name="conteudo" class="form-control mt-6" required></textarea>
         <br>
-      <button type="submit" class="btn btn-success">Criar Área de Pesquisa</button>
+      <button type="submit" class="btn btn-success">Criar Universidade</button>
     </form>
   </div>
 </div>

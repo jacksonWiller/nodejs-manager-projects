@@ -4,7 +4,7 @@
   const bodyParser = require('body-parser')
   const mongoose = require('mongoose')
   const app = express()
-  const admin = require('./routes/admin')
+  const admin = require('./controller/admin')
   const path = require('path')
   const session = require('express-session')
   const flash = require('connect-flash')
@@ -12,10 +12,12 @@
   const Postagem = mongoose.model('postagens')
   require('./models/AreaConhecimento')
   const Categoria = mongoose.model('categorias')
-  const usuarios = require('./routes/usuario')
+  const usuarios = require('./controller/usuario')
   const passport = require('passport')
   require('./config/auth')(passport)
   const db = require('./config/db')
+  require('./models/Universidade')
+  const Universidade = mongoose.model('universidades')
 
 //CONFIGURACOES
   // Sessão
@@ -99,10 +101,47 @@
         res.redirect('/')
       }
     }).catch((err)=>{
-      req.flash('error_msg','Erro ao carregar a página desta categoria.')
+      req.flash('error_msg','Erro ao carregar a página desta Área de Pesquisa.')
       res.redirect('/')
     })
   })
+
+////////////////////////////////////////////Universidades////////////////////////////////////////////
+
+app.get('/universidades', (req,res)=>{
+  Universidade.find().then((universidades)=>{
+    res.render('universidades/index', {universidades:universidades})
+  }).catch((err)=>{
+    req.flash('error_msg','Houve um erro interno ao listar as categorias.')
+    res.redirect('/')
+  })
+})
+
+app.get('/universidades/:slug', (req,res)=>{
+  niversidade.findOne({slugU:req.params.slug}).then((universidades)=>{
+    if(categoria){
+      Postagem.find({universidades:universidades._id}).then((postagens)=>{
+        res.render('universidades/postagens',{postagens:postagens,categoria:categoria})
+      }).catch((err)=>{
+        req.flash('error_msg', 'Houve um erro ao listar os posts!')
+        res.redirect('/')
+      })
+    }else {
+      req.flash('error_msg', 'Esta categoria não existe.')
+      res.redirect('/')
+    }
+  }).catch((err)=>{
+    req.flash('error_msg','Erro ao carregar a página desta Área de Pesquisa.')
+    res.redirect('/')
+  })
+})
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
   app.get('/404', (req,res)=>{
     res.send('Error 404!')
@@ -115,3 +154,4 @@ const port = process.env.PORT || 8081
 app.listen(port,()=>{
   console.log('Servidor rodando!')
 })
+console.log(process.env.Node_ENV);

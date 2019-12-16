@@ -12,12 +12,19 @@
     e professores para que a fase de escolha de temas e desenvolvimento dos 
     trabalhos gere menos frustrações para os discentes e conflitos de informações. 
   </p>
+  <a class="btn btn-primary btn-lg" href="/usuarios/login" role="button"> Entrar  </a>
   <a class="btn btn-primary btn-lg" href="/usuarios/registro" role="button"> Cadastrar </a>
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Saiba mais</button>
 
 </div>
-<h2>Trabalhos recentes</h2>
 
+<br>
+<h2>Trabalhos recentes</h2>
+<div class="card">
+  <div class="card-body">
+    <a class="btn btn-success btn-md" href="/admin/postagens" role="button"> Gerenciar Trabalhos </a>
+  </div>
+</div>
 {{#each postagens}}
 <div class="card mt-4">
   <div class="card-body">
