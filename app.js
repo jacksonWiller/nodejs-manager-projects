@@ -16,8 +16,8 @@
   const passport = require('passport')
   require('./config/auth')(passport)
   const db = require('./config/db')
-  require('./models/AreaConhecimento')
-  const Categoria = mongoose.model('categorias')
+  require('./models/Universidade')
+  const Universidade = mongoose.model('universidades')
 
 //CONFIGURACOES
   // Sessão
@@ -105,6 +105,24 @@
       res.redirect('/')
     })
   })
+
+////////////////////////////////////////////Universidades////////////////////////////////////////////
+
+app.get('/universidade', (req,res)=>{
+  Universidade.find().then((universidades)=>{
+    res.render('universidades/index', {universidades:universidades})
+  }).catch((err)=>{
+    req.flash('error_msg','Houve um erro interno ao listar as categorias.')
+    res.redirect('/')
+  })
+})
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
   app.get('/404', (req,res)=>{
     res.send('Error 404!')
